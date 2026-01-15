@@ -1,17 +1,23 @@
-# Case 001 — PCAP Triage in Security Onion (http_gzip.cap)
+# Case 001 — PCAP Triage (http_gzip.cap)
 
 ## Summary
-Imported a public training PCAP into Security Onion and performed SOC-style triage in Kibana using Zeek and NIDS data. Observed a single HTTP transaction (GET) returning 200 OK over port 80.
+Triage de un PCAP de entrenamiento con Kibana, pivotando Zeek (HTTP/Conn/Files) y revisando alertas NIDS (Snort). El caso contiene una única transacción HTTP (GET) con respuesta 200 OK por puerto 80.
 
 ## Scope / Time Range
-Kibana absolute time range: 2004-10-29 00:00:00 to 2004-10-30 00:00:00.
+Kibana: 2004-10-29 00:00:00 → 2004-10-30 00:00:00 (UTC)
 
 ## Data Sources
 - Zeek: bro_http, bro_conn, bro_files
 - NIDS: Snort (1 alert; classification: policy-violation)
 
+## Triage Approach (what I did first)
+1) Ajusté el time range al indicado por el import para evitar falsos “no results”.
+2) Fui a Zeek HTTP para identificar el/los requests y extraer IOCs base.
+3) Pivoté a Connections para validar que el flujo es consistente.
+4) Revisé NIDS para ver si el alerta agregaba contexto o cambiaba la severidad.
+
 ## Key Findings
-- HTTP (bro_http):
+- HTTP (bro_http)
   - Source: 192.168.69.2:34059
   - Destination: 192.168.69.1:80
   - Method/Status: GET / 200 (OK)
@@ -33,7 +39,8 @@ See `screenshots/`:
 See `iocs/case-001-iocs.txt`.
 
 ## Conclusion
-Training case with limited data. Traffic appears consistent with normal HTTP behavior. This case demonstrates PCAP ingestion, correct time scoping, pivoting across Zeek/NIDS views, and structured reporting.
+Por el tamaño del PCAP y la evidencia observada, lo traté como bajo o informativo: no hay indicadores fuertes de comportamiento malicioso, solo una request HTTP con 200 OK. El objetivo del caso es demostrar el flujo de triage, pivots y extracción de IOCs con evidencia reproducible.
 
 ## Recommended Actions (real environment)
-Pivot HTTP → conn/files for additional artifacts, enrich IOCs, and correlate with endpoint telemetry.
+- Si este patrón aparece repetido (múltiples GET a la misma URI/host), crear un hunt rápido por `uri + source_ip` y medir recurrencia.
+- Correlacionar con telemetría de endpoint (procesos/red) en la misma ventana temporal para descartar tooling no autorizado.
