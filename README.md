@@ -1,8 +1,12 @@
-# PCAP Triage — Security Onion (Portfolio)
+# PCAP Triage Portfolio — Zeek + NIDS (Snort) + Kibana
 
-## Case 001: http_gzip.cap
-Workflow: PCAP import → Kibana time scoping → Zeek pivots (HTTP/Conn/Files) → NIDS review → IOC extraction → case report.
+## Case 001 — http_gzip.cap
+Goal: document a fast SOC-style triage workflow on a small training PCAP using Kibana pivots across Zeek logs (HTTP/Conn/Files) and NIDS alerts.
 
-- Evidence: `screenshots/`
-- Report: `writeups/case-001.md`
+Key artifact from this case:
+- HTTP GET `192.168.69.2:34059 → 192.168.69.1:80` to `/test/ethereal.html` (status 200 OK)
+
+Contents
+- Evidence (screenshots): `screenshots/`
+- Case report: `writeups/case-001.md`
 - IOCs: `iocs/case-001-iocs.txt`
