@@ -1,12 +1,18 @@
-# PCAP Triage Portfolio — Zeek + NIDS (Snort) + Kibana
+# Portfolio — Triage de PCAP (Zeek + NIDS/Snort + Kibana)
 
-## Case 001 — http_gzip.cap
-Goal: document a fast SOC-style triage workflow on a small training PCAP using Kibana pivots across Zeek logs (HTTP/Conn/Files) and NIDS alerts.
+## Caso 001 — http_gzip.cap
+Objetivo: documentar un flujo de triage estilo SOC sobre un PCAP de entrenamiento, pivotando entre logs de Zeek (HTTP/Conn/Files) y alertas NIDS (Snort) en Kibana, con extracción de IOCs y reporte.
 
-Key artifact from this case:
-- HTTP GET `192.168.69.2:34059 → 192.168.69.1:80` to `/test/ethereal.html` (status 200 OK)
+Artefacto principal observado:
+- HTTP GET `192.168.69.2:34059 → 192.168.69.1:80` a `/test/ethereal.html` (200 OK)
 
-Contents
-- Evidence (screenshots): `screenshots/`
-- Case report: `writeups/case-001.md`
+## Estructura
+- Evidencias (capturas): `screenshots/`
+- Reporte del caso: `writeups/case-001.md`
 - IOCs: `iocs/case-001-iocs.txt`
+
+## Qué demuestra este repo
+- Importación y acotación correcta de ventana temporal (Kibana)
+- Pivoteo de investigación: HTTP → conexiones → contexto NIDS
+- Extracción y registro de IOCs
+- Redacción de caso con evidencia reproducible
