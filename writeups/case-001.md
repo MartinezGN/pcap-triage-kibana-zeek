@@ -1,32 +1,41 @@
-# Caso 001 — PCAP Triage (http_gzip.cap)
+# Caso 001 — Triage de PCAP (http_gzip.cap)
 
-## Summary
-Triage de un PCAP de entrenamiento con Kibana, pivotando Zeek (HTTP/Conn/Files) y revisando alertas NIDS (Snort). El caso contiene una única transacción HTTP (GET) con respuesta 200 OK por puerto 80.
+## Resumen
+Análisis de un PCAP de entrenamiento con un stack NSM (Zeek + NIDS/Snort) visualizado en Kibana. El caso contiene una única transacción HTTP (GET) con respuesta 200 OK por puerto 80.
 
-## Scope / Time Range
-Kibana (absolute): 2004-10-29 00:00:00 → 2004-10-30 00:00:00 (UTC)
+## Alcance y ventana temporal
+Ventana temporal (Kibana, modo Absolute): 2004-10-29 00:00:00 → 2004-10-30 00:00:00 (UTC)
 
-## Data Sources
-- Zeek: bro_http, bro_conn, bro_files
-- NIDS: Snort (1 alert; classification: policy-violation)
+## Fuentes de datos
+- Zeek: `bro_http`, `bro_conn`, `bro_files`
+- NIDS: Snort (1 alerta; clasificación `policy-violation`)
 
-## Triage Approach
-1) Ajusté el time range al indicado por el import.
-2) Fui a Zeek HTTP para identificar los requests y extraer IOCs base.
-3) Pivoté a Connections para validar que el flujo es consistente.
-4) Revisé NIDS para ver si el alerta agregaba contexto o cambiaba la severidad.
+## Enfoque de triage
+1) Ajusté la ventana temporal al rango indicado por el import para evitar falsos “sin resultados”.
+2) Revisé Zeek HTTP (`bro_http`) para identificar la transacción y extraer IOCs base.
+3) Pivoteé a Zeek Connections (`bro_conn`) para validar coherencia del flujo (origen/destino/servicio/estado).
+4) Revisé NIDS (Snort) para ver si la alerta aportaba contexto adicional o modificaba la severidad.
 
-## Key Findings
-- HTTP (bro_http)
-  - Source: 192.168.69.2:34059
-  - Destination: 192.168.69.1:80
-  - Method/Status: GET / 200 (OK)
-  - URI: /test/ethereal.html
-  - User-Agent: Firefox/0.10.1 (Linux PPC)
-- Connections: 1 HTTP service connection (normal completion).
-- NIDS: 1 policy-violation alert (reviewed for context).
+## Hallazgos principales
+### HTTP (Zeek `bro_http`)
+- `source_ip`: 192.168.69.2
+- `source_port`: 34059
+- `destination_ip` / `destination_ips`: 192.168.69.1
+- `destination_port`: 80
+- `method`: GET
+- `status_code`: 200 (`status_message`: OK)
+- `uri`: /test/ethereal.html
+- `useragent`: Mozilla/5.0 (X11; U; Linux ppc; rv:1.7.3) Gecko/20041004 Firefox/0.10.1
+- `host`: 56cbaaf2f6f
+- `virtual_host`: cerberus
 
-## Evidence
+### Conexiones (Zeek `bro_conn`)
+- 1 conexión con servicio HTTP, finalización normal (normal completion).
+
+### NIDS (Snort)
+- 1 alerta con clasificación `policy-violation` (revisada como contexto).
+
+## Evidencia
 Ver `screenshots/`:
 - 01-overview.png
 - 02-zeek-http-dashboard.png
@@ -38,9 +47,9 @@ Ver `screenshots/`:
 ## IOCs
 Ver `iocs/case-001-iocs.txt`.
 
-## Conclusion
-Por el tamaño del PCAP y la evidencia observada, lo traté como de serveridad baja, informativo: no hay indicadores fuertes de comportamiento malicioso, ya que solo se registró una sola request HTTP con 200 OK. El objetivo del caso es demostrar el flujo de triage, pivots y extracción de IOCs con evidencia reproducible.
+## Conclusión
+**Severidad:** Baja, informativo. Por el tamaño del PCAP y la evidencia observada, lo traté como tráfico HTTP normal hay solo una sola request con 200 OK. El objetivo del caso es documentar el flujo de triage: ajuste de ventana temporal, pivoteo entre Zeek (HTTP/Conn/Files), revisión de NIDS y extracción de IOCs con evidencia reproducible.
 
-## Recommended Actions
+## Acciones recomendadas (en un entorno real)
 - Si el patrón se repite (varios GET a la misma URI/host), crear una búsqueda rápida filtrando por `uri` y `source_ip` para medir recurrencia y volumen.
 - Correlacionar con telemetría del endpoint (procesos y conexiones de red) en la misma ventana temporal para descartar software no autorizado o actividad automatizada.
