@@ -3,12 +3,12 @@
 Repositorio de práctica orientado a SOC L1: importación de PCAP, acotación de ventana temporal, análisis en Kibana (Zeek + Snort), extracción de IOCs y reporte con evidencia.
 
 ## Casos
-### Caso 001 — PCAP pequeño (HTTP básico)
+### Caso 001 — PCAP
 - Reporte: `writeups/case-001.md`
 - IOCs: `iocs/case-001-iocs.txt`
 - Evidencias: `screenshots/`
 
-### Caso 002 — PCAP de mayor complejidad (DNS/HTTP + NIDS)
+### Caso 002 — PCAP
 - Reporte: `writeups/case-002.md`
 - IOCs: `iocs/case-002-iocs.txt`
 - Evidencias: `screenshots/`
