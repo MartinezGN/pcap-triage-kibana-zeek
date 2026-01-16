@@ -1,18 +1,26 @@
 # Portfolio — Triage de PCAP (Zeek + NIDS/Snort + Kibana)
 
-## Caso 001 — http_gzip.cap
-Objetivo: documentar un flujo de triage estilo SOC sobre un PCAP de entrenamiento, pivotando entre logs de Zeek (HTTP/Conn/Files) y alertas NIDS (Snort) en Kibana, con extracción de IOCs y reporte.
+Repositorio de práctica orientado a SOC L1: importación de PCAP, acotación de ventana temporal, análisis en Kibana (Zeek + Snort), extracción de IOCs y reporte con evidencia.
 
-Artefacto principal observado:
-- HTTP GET `192.168.69.2:34059 → 192.168.69.1:80` a `/test/ethereal.html` (200 OK)
+## Casos
+### Caso 001 — PCAP pequeño (HTTP básico)
+- Reporte: `writeups/case-001.md`
+- IOCs: `iocs/case-001-iocs.txt`
+- Evidencias: `screenshots/`
+
+### Caso 002 — PCAP de mayor complejidad (DNS/HTTP + NIDS)
+- Reporte: `writeups/case-002.md`
+- IOCs: `iocs/case-002-iocs.txt`
+- Evidencias: `screenshots/`
 
 ## Estructura
-- Evidencias (capturas): `screenshots/`
-- Reporte del caso: `writeups/case-001.md`
-- IOCs: `iocs/case-001-iocs.txt`
+- `writeups/`: reportes de cada caso
+- `iocs/`: indicadores extraídos
+- `screenshots/`: capturas de Kibana como evidencia reproducible
 
-## Qué demuestra este repo
-- Importación y acotación correcta de ventana temporal (Kibana)
-- Pivoteo de investigación: HTTP → conexiones → contexto NIDS
-- Extracción y registro de IOCs
-- Redacción de caso con evidencia reproducible
+## Qué demuestra este repositorio
+- Importación de PCAP y acotación correcta de ventana temporal en Kibana.
+- Investigación basada en evidencia: navegación por dashboards (DNS/HTTP/Conn/NIDS) y validación cruzada en Discover.
+- Identificación de host origen y destinos relevantes (IPs internas/externas) a partir de eventos Zeek y alertas NIDS.
+- Extracción y registro de IOCs (dominios, IPs, puertos, URIs y SIDs de reglas) para detección y seguimiento.
+- Documentación reproducible: reporte por caso + capturas + lista de IOCs.
