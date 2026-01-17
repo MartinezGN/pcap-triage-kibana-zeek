@@ -63,7 +63,6 @@ Ver `screenshots/`:
 - 12-discover-dns-filter-caso002.png
 - 13-discover-http-ssl-filter-caso002.png
 - 14-nids-alert-list-caso002.png
-- (opcional) 15-nids-event-expanded-caso002.png
 
 ## IOCs
 Ver `iocs/case-002-iocs.txt`.
