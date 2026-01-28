@@ -50,6 +50,6 @@ Ver `iocs/case-001-iocs.txt`.
 ## Conclusión
 **Severidad:** Baja (informativo). Por el tamaño del PCAP y la evidencia observada, lo traté como tráfico HTTP normal, ya que solo hay una sola request con 200 OK. El objetivo del caso es documentar el flujo de triage: ajuste de ventana temporal, pivoteo entre Zeek (HTTP/Conn/Files), revisión de NIDS y extracción de IOCs con evidencia reproducible.
 
-## Acciones recomendadas (en un entorno real)
+## Acciones recomendadas
 - Si el patrón se repite (varios GET a la misma URI/host), crear una búsqueda rápida filtrando por `uri` y `source_ip` para medir recurrencia y volumen.
 - Correlacionar con telemetría del endpoint (procesos y conexiones de red) en la misma ventana temporal para descartar software no autorizado o actividad automatizada.
