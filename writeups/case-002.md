@@ -1,4 +1,4 @@
-- # Case 002 — PCAP Triage (2025-01-22-traffic-analysis-exercise.pcap)
+# Case 002 — PCAP Triage (2025-01-22-traffic-analysis-exercise.pcap)
 
 ## Summary
 Analysis of a training PCAP on an NSM stack (Zeek + NIDS/Snort) visualized in Kibana. The objective is to practice SOC L1 triage: time-window scoping, navigation across DNS/HTTP/Connections/NIDS views, and extraction of IOCs for reproducible documentation.
