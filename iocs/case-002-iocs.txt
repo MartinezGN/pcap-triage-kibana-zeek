@@ -1,22 +1,22 @@
-# Host interno
-10.1.17.215
+# Internal host
+- 10.1.17.215
 
-# Infra interna
-10.1.17.2:53
+# Internal infrastructure
+- 10.1.17.2:53
 
-# Dominios / DNS
-dyngate.com
-ping3.dyngate.com
+# Domains / DNS
+- dyngate.com
+- ping3.dyngate.com
 
-# IPs externas observadas
-185.188.32.26:80
-5.252.153.241:80
+# Observed external IPs
+- 185.188.32.26:80
+- 5.252.153.241:80
 
-# NIDS (Snort) - SIDs observados
-sid:2009475
-sid:2009702
-sid:2021076
+# NIDS (Snort) — observed SIDs
+- sid:2009475
+- sid:2009702
+- sid:2021076
 
-# Notas
-- Ventana temporal Kibana: 2025-01-22 → 2025-01-23
-- Dataset con NIDS total: 166 alertas (bad-unknown y policy-violation)
+# Notes
+- Kibana time window (UTC): 2025-01-22 → 2025-01-23
+- Dataset NIDS total: 166 alerts (`bad-unknown` and `policy-violation`)
