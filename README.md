@@ -1,26 +1,27 @@
-# Portfolio — Triage de PCAP (Zeek + NIDS/Snort + Kibana)
+# Portfolio — PCAP Triage (Zeek + NIDS/Snort + Kibana)
 
-Repositorio de práctica orientado a SOC L1: importación de PCAP, acotación de ventana temporal, análisis en Kibana (Zeek + Snort), extracción de IOCs y reporte con evidencia.
+Hands-on repository aimed at SOC L1 practice: PCAP ingestion, narrowing the time window, analysis in Kibana (Zeek + Snort), IOC extraction, and evidence-based reporting.
 
-## Casos
-### Caso 001 — PCAP
-- Reporte: `writeups/case-001.md`
+## Cases
+
+### Case 001 — PCAP
+- Report: `writeups/case-001.md`
 - IOCs: `iocs/case-001-iocs.txt`
-- Evidencias: `screenshots/`
+- Evidence: `screenshots/`
 
-### Caso 002 — PCAP
-- Reporte: `writeups/case-002.md`
+### Case 002 — PCAP
+- Report: `writeups/case-002.md`
 - IOCs: `iocs/case-002-iocs.txt`
-- Evidencias: `screenshots/`
+- Evidence: `screenshots/`
 
-## Estructura
-- `writeups/`: reportes de cada caso
-- `iocs/`: indicadores extraídos
-- `screenshots/`: capturas de Kibana como evidencia reproducible
+## Structure
+- `writeups/`: per-case reports
+- `iocs/`: extracted indicators
+- `screenshots/`: Kibana captures as reproducible evidence
 
-## Qué demuestra este repositorio
-- Importación de PCAP y acotación correcta de ventana temporal en Kibana.
-- Investigación basada en evidencia: navegación por dashboards (DNS/HTTP/Conn/NIDS) y validación cruzada en Discover.
-- Identificación de host origen y destinos relevantes (IPs internas/externas) a partir de eventos Zeek y alertas NIDS.
-- Extracción y registro de IOCs (dominios, IPs, puertos, URIs y SIDs de reglas) para detección y seguimiento.
-- Documentación reproducible: reporte por caso + capturas + lista de IOCs.
+## What this repository demonstrates
+- PCAP ingestion and correct time-window scoping in Kibana.
+- Evidence-based investigation: dashboard navigation (DNS/HTTP/Conn/NIDS) and cross-validation in Discover.
+- Identification of source hosts and relevant destinations (internal/external IPs) from Zeek events and NIDS alerts.
+- Extraction and logging of IOCs (domains, IPs, ports, URIs, and rule SIDs) for detection and tracking.
+- Reproducible documentation: per-case report + screenshots + IOC list.
