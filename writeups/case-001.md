@@ -1,42 +1,43 @@
-# Caso 001 — Triage de PCAP (http_gzip.cap)
+# Case 001 — PCAP Triage (http_gzip.cap)
 
-## Resumen
-Análisis de un PCAP de entrenamiento con un stack NSM (Zeek + NIDS/Snort) visualizado en Kibana. El caso contiene una única transacción HTTP (GET) con respuesta 200 OK por puerto 80.
+## Summary
+Analysis of a training PCAP on an NSM stack (Zeek + NIDS/Snort) visualized in Kibana. The case contains a single HTTP transaction (GET) with a 200 OK response over port 80.
 
-## Alcance y ventana temporal
-Ventana temporal: 2004-10-29 00:00:00 → 2004-10-30 00:00:00 (UTC)
+## Scope and time window
+Time window: 2004-10-29 00:00:00 — 2004-10-30 00:00:00 (UTC)
 
-## Fuentes de datos
+## Data sources
 - Zeek: `bro_http`, `bro_conn`, `bro_files`
-- NIDS: Snort (1 alerta; clasificación `policy-violation`)
+- NIDS: Snort (1 alert; classification `policy-violation`)
 
-## Enfoque de triage
-1) Ajusté la ventana temporal al rango indicado por el import para evitar falsos “sin resultados”.
-2) Revisé Zeek HTTP (`bro_http`) para identificar la transacción y extraer IOCs base.
-3) Pivoteé a Zeek Connections (`bro_conn`) para validar coherencia del flujo (origen/destino/servicio/estado).
-4) Revisé NIDS (Snort) para ver si la alerta aportaba contexto adicional o modificaba la severidad.
+## Triage approach
+1. Adjust the time window to the range indicated by the import to avoid false “no results” findings.
+2. Review Zeek HTTP (`bro_http`) to identify the transaction and extract IOCs if applicable.
+3. Pivot to Zeek Connections (`bro_conn`) to validate flow consistency (origin/destination/service/state).
+4. Review NIDS (Snort) to see if the alert adds context or changes severity.
 
-## Hallazgos principales
+## Key findings
+
 ### HTTP (Zeek `bro_http`)
 - `source_ip`: 192.168.69.2
 - `source_port`: 34059
-- `destination_ip` / `destination_ips`: 192.168.69.1
+- `destination_ip` / `destination_ip`: 192.168.69.1
 - `destination_port`: 80
 - `method`: GET
 - `status_code`: 200 (`status_message`: OK)
 - `uri`: /test/ethereal.html
 - `useragent`: Mozilla/5.0 (X11; U; Linux ppc; rv:1.7.3) Gecko/20041004 Firefox/0.10.1
-- `host`: 56cbaaf2f6f
+- `host`: 56c0aaf26f
 - `virtual_host`: cerberus
 
-### Conexiones (Zeek `bro_conn`)
-- 1 conexión con servicio HTTP, finalización normal (normal completion).
+### Connections (Zeek `bro_conn`)
+- 1 HTTP connection, normal termination (`normal completion`).
 
 ### NIDS (Snort)
-- 1 alerta con clasificación `policy-violation` (revisada como contexto).
+- 1 alert with classification `policy-violation` (reviewed as context).
 
-## Evidencia
-Ver `screenshots/`:
+## Evidence
+See `screenshots/`:
 - 01-overview.png
 - 02-zeek-http-dashboard.png
 - 03-zeek-connections.png
@@ -45,11 +46,11 @@ Ver `screenshots/`:
 - 06-http-event-expanded.png
 
 ## IOCs
-Ver `iocs/case-001-iocs.txt`.
+See `iocs/case-001-iocs.txt`
 
-## Conclusión
-**Severidad:** Baja (informativo). Por el tamaño del PCAP y la evidencia observada, lo traté como tráfico HTTP normal, ya que solo hay una sola request con 200 OK. El objetivo del caso es documentar el flujo de triage: ajuste de ventana temporal, pivoteo entre Zeek (HTTP/Conn/Files), revisión de NIDS y extracción de IOCs con evidencia reproducible.
+## Conclusion
+Severity: Low (informational). Given the PCAP size and the observed evidence, this appears to be normal HTTP traffic, as there is only a single request with a 200 OK response. The goal of the case is to document the triage flow: time-window scoping, pivots between Zeek (HTTP/Conn/Files), Snort review, and IOC extraction with reproducible evidence.
 
-## Acciones recomendadas
-- Si el patrón se repite (varios GET a la misma URI/host), crear una búsqueda rápida filtrando por `uri` y `source_ip` para medir recurrencia y volumen.
-- Correlacionar con telemetría del endpoint (procesos y conexiones de red) en la misma ventana temporal para descartar software no autorizado o actividad automatizada.
+## Recommended actions
+- If the pattern repeats (multiple GETs to the same URI/host), create a quick query filtering by `uri` and `source_ip` to measure recurrence and volume.
+- Correlate with endpoint telemetry (processes and network connections) in the same time window to rule out unauthorized software or automated activity.
