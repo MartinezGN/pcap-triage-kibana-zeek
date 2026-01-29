@@ -1,19 +1,22 @@
-# IPs
-- Source IP: 192.168.69.2
-- Destination IP: 192.168.69.1
-- Source Port: 34059
-- Destination Port: 80
+# Case 001 - IOCs
+# Note: Private IPs (192.168.x.x) are lab-specific and not actionable outside this context.
 
-# HTTP
-- Method: GET
-- Status: 200 (OK)
-- Host (bro_http.host): 56cbaaf2f6f
-- Virtual Host: cerberus
-- URI: /test/ethereal.html
-- Path (log source): /nsm/import/bro/bro-4YAKSLGi/http.log
-- User-Agent: Mozilla/5.0 (X11; U; Linux ppc; rv:1.7.3) Gecko/20041004 Firefox/0.10.1
+## Network Indicators
+- destination_ip: 192.168.69.1 [internal/lab]
+- destination_port: 80/tcp
+- source_ip: 192.168.69.2 [internal/lab]
+- source_port: 34059/tcp
 
-# Notes
+## HTTP Indicators
+- method: GET
+- status_code: 200 (OK)
+- host: 56c0aaf26f
+- virtual_host: cerberus
+- uri: /test/ethereal.html
+- user_agent: Mozilla/5.0 (X11; U; Linux ppc; rv:1.7.3) Gecko/20041004 Firefox/0.10.1
+
+## Lab Metadata (not IOCs)
 - PCAP: http_gzip.cap (Wireshark sample capture)
-- Imported into Security Onion using `so-import-pcap`
-- Time range used in Kibana (UTC): 2004-10-29 to 2004-10-30
+- Import method: so-import-pcap (Security Onion)
+- Log path: /nsm/import/bro/bro-4YAKSLGi/http.log
+- Time range (UTC): 2004-10-29 to 2004-10-30
