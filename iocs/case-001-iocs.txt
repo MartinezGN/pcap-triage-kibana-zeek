@@ -1,19 +1,19 @@
 # IPs
-Source IP: 192.168.69.2
-Destination IP: 192.168.69.1
-Source Port: 34059
-Destination Port: 80
+- Source IP: 192.168.69.2
+- Destination IP: 192.168.69.1
+- Source Port: 34059
+- Destination Port: 80
 
 # HTTP
-Method: GET
-Status: 200 (OK)
-Host (bro_http.host): 56cbaaf2f6f
-Virtual Host: cerberus
-URI: /test/ethereal.html
-Path (log source): /nsm/import/bro/bro-4YAKSLGi/http.log
-User-Agent: Mozilla/5.0 (X11; U; Linux ppc; rv:1.7.3) Gecko/20041004 Firefox/0.10.1
+- Method: GET
+- Status: 200 (OK)
+- Host (bro_http.host): 56cbaaf2f6f
+- Virtual Host: cerberus
+- URI: /test/ethereal.html
+- Path (log source): /nsm/import/bro/bro-4YAKSLGi/http.log
+- User-Agent: Mozilla/5.0 (X11; U; Linux ppc; rv:1.7.3) Gecko/20041004 Firefox/0.10.1
 
 # Notes
-PCAP: http_gzip.cap (Wireshark sample capture)
-Imported into Security Onion using so-import-pcap
-Time range used in Kibana: 2004-10-29 to 2004-10-30
+- PCAP: http_gzip.cap (Wireshark sample capture)
+- Imported into Security Onion using `so-import-pcap`
+- Time range used in Kibana (UTC): 2004-10-29 to 2004-10-30
