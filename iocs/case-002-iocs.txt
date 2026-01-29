@@ -1,22 +1,38 @@
-# Internal host
-- 10.1.17.215
+# Case 002 - IOCs
+# Source: Malware-Traffic-Analysis.net (2025-01-22)
+# Scenario: Fake Google Authenticator download → Malware infection
 
-# Internal infrastructure
-- 10.1.17.2:53
+## Infected Host
+- victim_ip: 10.1.17.215 [internal]
 
-# Domains / DNS
+## Internal Infrastructure
+- domain_controller: 10.1.17.2 (WIN-GSH54QLW48D)
+- dns_server: 10.1.17.2:53
+- gateway: 10.1.17.1
+- lan_segment: 10.1.17.0/24
+- ad_domain: bluemoontuesday.com
+
+## Malicious Domains (C2)
 - dyngate.com
 - ping3.dyngate.com
 
-# Observed external IPs
+## Malicious IPs (C2)
 - 185.188.32.26:80
 - 5.252.153.241:80
 
-# NIDS (Snort) — observed SIDs
+## NIDS Signatures (Snort SIDs)
 - sid:2009475
 - sid:2009702
 - sid:2021076
 
-# Notes
-- Kibana time window (UTC): 2025-01-22 → 2025-01-23
-- Dataset NIDS total: 166 alerts (`bad-unknown` and `policy-violation`)
+## Lab Metadata (not IOCs)
+- PCAP: 2025-01-22-traffic-analysis-exercise.pcap
+- Source: https://www.malware-traffic-analysis.net/2025/01/22/index.html
+- Import method: so-import-pcap (Security Onion)
+- Time range (UTC): 2025-01-22 16:44:00 to 2025-01-22 17:40:00
+- Total NIDS alerts: 166 (bad-unknown, policy-violation)
+
+## Threat Context
+- Attack vector: Malvertising (malicious ad on Bing search)
+- Lure: Fake Google Authenticator download page
+- Threat intel: Unit42 (Palo Alto Networks)
