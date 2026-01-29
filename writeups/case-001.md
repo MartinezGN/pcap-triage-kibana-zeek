@@ -21,7 +21,7 @@ Time window: 2004-10-29 00:00:00 — 2004-10-30 00:00:00 (UTC)
 ### HTTP (Zeek `bro_http`)
 - `source_ip`: 192.168.69.2
 - `source_port`: 34059
-- `destination_ip` / `destination_ip`: 192.168.69.1
+- `destination_ip`: 192.168.69.1
 - `destination_port`: 80
 - `method`: GET
 - `status_code`: 200 (`status_message`: OK)
